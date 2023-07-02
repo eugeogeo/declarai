@@ -1,10 +1,11 @@
 import { createTheme } from "@mui/material/styles";
 
+// TODO: cliente pediu para rever paleta
 const theme = createTheme({
   palette: {
     primary: {
       light: "#EFC32F",
-      main: "#91376B",
+      main: "#000000",
       dark: "#3d162d",
     },
     secondary:{
