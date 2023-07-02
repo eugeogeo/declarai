@@ -1,5 +1,7 @@
+import NovoUsuario from "./NovoUsuario";
 import Login from "./login";
 
-export default{
+export {
     Login,
+    NovoUsuario,
 }
