@@ -1,8 +1,9 @@
 import { Box, Container, Stack, Typography, useTheme } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogOrCreateUser, TypeField } from "../../@types/enum";
 import BaseCard from "./components/BaseCard";
+import useUser from "../../hooks/useUser";
 
 function Login() {
 
@@ -10,6 +11,17 @@ function Login() {
 
     const theme = useTheme();
     const navigate = useNavigate();
+    
+    const {setUser} = useUser();
+
+    const handleLogIn = useCallback(async () => {
+        setUser({
+            ra: "2325810", 
+            nome:"Geovana Figueiredo Silva", 
+            email: "geovanasilva@alunos.utfpr.edu.br",
+            cod: "admin",
+        });
+    },[setUser]);
 
     const fields = useMemo(() => {
         if(logOrCreateUser === LogOrCreateUser.LogIn){
@@ -29,7 +41,7 @@ function Login() {
                     label: "Entrar",
                     type: TypeField.Button,
                     optionsButton:{
-                        onClick: async () => { navigate("/")},
+                        onClick: handleLogIn,
                         variant: "contained",
                     }
                 },
@@ -101,7 +113,7 @@ function Login() {
                     }
             ]
         }
-    }, [logOrCreateUser, navigate, theme.palette.primary.main])
+    }, [handleLogIn, logOrCreateUser, navigate, theme.palette.primary.main])
 
     return (
         <Box
