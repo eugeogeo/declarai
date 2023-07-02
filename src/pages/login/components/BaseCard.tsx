@@ -13,6 +13,7 @@ type FieldType = {
     extra?: ReactElement;
   }
 };
+// TODO: adicionar opção de colocar mascaras
 
 type Props = {
   label: string;
@@ -36,7 +37,7 @@ const BaseCard = ({ label, fields = []}: Props) => {
     <Box 
       component="form"
       boxShadow="10"
-      p={6}
+      p={5}
       maxWidth="24rem"
       width="100%"
       minHeight="31rem"
@@ -64,7 +65,7 @@ const BaseCard = ({ label, fields = []}: Props) => {
         {label}
       </Typography>
     </Stack>
-    <Stack spacing={1} mt={1}>
+    <Stack spacing={1} mt={4}>
       {
         inputs.map((input) => {
           return (
@@ -87,7 +88,7 @@ const BaseCard = ({ label, fields = []}: Props) => {
         })
       }
     </Stack>
-    <Stack spacing={1} mt={1}>
+    <Stack spacing={1} mt={4}>
       {
         buttons?.map((button) => {
           return(
