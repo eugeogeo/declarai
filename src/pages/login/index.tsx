@@ -1,10 +1,12 @@
 import { Box, Button, Container, Stack, TextField, Typography, useTheme } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
     const theme = useTheme();
     const { control } = useForm();
+    const navigate = useNavigate();
     return (
         <Box
             sx={{
@@ -124,7 +126,7 @@ function Login() {
                                         alignItems: "center",
                                     }}
                                     fullWidth
-                                    type="submit"
+                                    onClick={async () => { navigate("/novo-usuario")}}
                                     id="buttonNewUsuario"
                                     size="large"
                                     variant="outlined"
