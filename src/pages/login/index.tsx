@@ -1,16 +1,113 @@
-import { Box, Button, Container, Stack, TextField, Typography, useTheme } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { Box, Container, Stack, Typography, useTheme } from "@mui/material";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LogOrCreateUser, TypeField } from "../../@types/enum";
+import BaseCard from "./components/BaseCard";
 
 function Login() {
 
+    const [logOrCreateUser, setLogOrCreateUser] = useState(1);
+
     const theme = useTheme();
-    const { control } = useForm();
     const navigate = useNavigate();
+
+    const fields = useMemo(() => {
+        if(logOrCreateUser === LogOrCreateUser.LogIn){
+            return [
+                {
+                    name: "registroAcademico", 
+                    label: "RA", 
+                    type: TypeField.Input
+                },
+                {
+                    name: "senha", 
+                    label: "Senha", 
+                    type: TypeField.Input
+                },
+                {
+                    name: "entrar",
+                    label: "Entrar",
+                    type: TypeField.Button,
+                    optionsButton:{
+                        onClick: async () => { navigate("/")},
+                        variant: "contained",
+                    }
+                },
+                {
+                    name: "cadastrar",
+                    label: "Cadastre-se",
+                    type: TypeField.Button,
+                    optionsButton:{
+                        onClick: async () => { setLogOrCreateUser(LogOrCreateUser.CreateUser)},
+                        variant: "outlined",
+                        extra:
+                            
+                            <Typography
+                            variant="subtitle2" 
+                            color={theme.palette.primary.main}
+                        >
+                            Ainda não tem uma conta? Crie uma nova com um clique.
+                        </Typography>
+                        
+                    }
+                },
+            ]
+        } else if(logOrCreateUser === LogOrCreateUser.CreateUser){
+            return [
+                {
+                    name: "nome", 
+                    label: "Nome", 
+                    type: TypeField.Input
+                },
+                {
+                    name: "registroAcademico", 
+                    label: "RA", 
+                    type: TypeField.Input
+                },
+                {
+                    name: "email", 
+                    label: "E-mail", 
+                    type: TypeField.Input
+                },
+                {
+                    name: "senha", 
+                    label: "Senha", 
+                    type: TypeField.Input
+                },
+                {
+                    name: "cadastrar",
+                    label: "Cadastrar",
+                    type: TypeField.Button,
+                    optionsButton:{
+                        onClick: async () => { navigate("/")},
+                        variant: "contained",                        }
+                },
+                {
+                    name: "logIn",
+                    label: "Voltar para o Log-in",
+                    type: TypeField.Button,
+                    optionsButton:
+                    {
+                        onClick: async () => { setLogOrCreateUser(LogOrCreateUser.LogIn)},
+                        variant: "outlined",
+                        extra:
+                            <Typography
+                                variant="subtitle2" 
+                                color={theme.palette.primary.main}
+                            >
+                                Já tem uma conta? Volte para fazer login.
+                            </Typography>
+                        }
+                    }
+            ]
+        }
+    }, [logOrCreateUser, navigate, theme.palette.primary.main])
+
     return (
         <Box
+        // TODO: cliente pediu degrade no background
             sx={{
-                backgroundColor: "#F6F8F7",
+                backgroundColor: "#f8e195",
                 backgroundPositionX: "right",
                 backgroundPositionY: "bottom",
                 backgroundRepeat: "no-repeat",
@@ -30,117 +127,20 @@ function Login() {
                                 component="h1" 
                                 color={theme.palette.primary.main}
                             >
-                                declaraí . . .
+                                Declaraí . . .
                             </Typography>
+                            {/* TODO: cliente pediu logo das representações academicas */}
                             <Typography 
                                 variant="subtitle1" 
                                 color={theme.palette.primary.main}
                             >
-                                sistema gerenciador de emissão de declarações acadêmicas
+                                Sistema gerenciador de emissão de declarações acadêmicas
                             </Typography>
                         </Stack>
-
-                        <Box 
-                            component="form"
-                            boxShadow="10"
-                            p={6}
-                            maxWidth="24rem"
-                            width="100%"
-                            minHeight="31rem"
-                            borderRadius="8px"
-                            bgcolor="white"
-                            display="flex"
-                            flexDirection="column"
-                            justifyContent="space-between"
-                            // onSubmit={handleSubmit(onSubmit)}
-                            sx={{
-                            [theme.breakpoints.down("md")]: {
-                                maxWidth: "24rem",
-                            },
-                            [theme.breakpoints.up("md")]: {
-                                maxWidth: "28rem",
-                            },
-                            }}
-                        >
-                            <Stack direction="row" alignItems="center">
-                                <Typography 
-                                    variant="h4" 
-                                    component="h1" 
-                                    color={theme.palette.primary.main}
-                                >
-                                    entrar
-                                </Typography>
-                            </Stack>
-                            <Stack spacing={2}>
-                                <Controller
-                                name="usuario"
-                                control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                    id="email"
-                                    label="E-mail"
-                                    variant="filled"
-                                    //   error={!!errors.usuario}
-                                    //   helperText={errors.usuario?.message}
-                                    {...field}
-                                    />
-                                )}
-                                />
-
-                                <Controller
-                                name="senha"
-                                control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                    id="senha"
-                                    label="Senha"
-                                    variant="filled"
-                                    //   error={!!errors.senha}
-                                    //   helperText={errors.senha?.message}
-                                    {...field}
-                                    />
-                                )}
-                                />
-                            </Stack>
-                            <Stack spacing={1}>
-                                <Button
-                                    // isLoading={isSubmitting}
-                                    sx={{
-                                        marginTop: "auto",
-                                        display: "flex",
-                                        alignItems: "center",
-                                    }}
-                                    fullWidth
-                                    type="submit"
-                                    id="buttonLogin"
-                                    size="large"
-                                    variant="contained"
-                                >
-                                    Entrar
-                                </Button>
-                                <Button
-                                    // isLoading={isSubmitting}
-                                    sx={{
-                                        marginTop: "auto",
-                                        display: "flex",
-                                        alignItems: "center",
-                                    }}
-                                    fullWidth
-                                    onClick={async () => { navigate("/novo-usuario")}}
-                                    id="buttonNewUsuario"
-                                    size="large"
-                                    variant="outlined"
-                                >
-                                    Criar conta
-                                </Button>
-                                <Typography
-                                variant="subtitle2" 
-                                color={theme.palette.primary.main}
-                                >
-                                    Ainda não tem uma conta? Crie uma nova com um clique.
-                                </Typography>
-                            </Stack>
-                        </Box>
+                        <BaseCard 
+                            label={logOrCreateUser === LogOrCreateUser.LogIn ? "Entrar" : "Cadastrar"}
+                            fields={fields} 
+                        />
                     </Stack>
                 </Box>
             </Container>
