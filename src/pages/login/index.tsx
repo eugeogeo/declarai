@@ -8,7 +8,7 @@ function Login() {
     return (
         <Box
             sx={{
-                backgroundColor: "#E6E6FA",
+                backgroundColor: "#F6F8F7",
                 backgroundPositionX: "right",
                 backgroundPositionY: "bottom",
                 backgroundRepeat: "no-repeat",
@@ -21,12 +21,6 @@ function Login() {
                         justifyContent="space-between"
                         flexDirection="row"
                         width="100vw"
-                        sx={{
-                            [theme.breakpoints.down("md")]: {
-                                flexDirection: "column-reverse",
-                                alignItems: "center",
-                            },
-                        }}
                     >
                         <Stack display="flex" justifyContent="flex-end">
                             <Typography 
@@ -44,15 +38,18 @@ function Login() {
                             </Typography>
                         </Stack>
 
-                        <Stack 
+                        <Box 
                             component="form"
-                            p={4}
-                            boxShadow="2"
+                            boxShadow="10"
+                            p={6}
                             maxWidth="24rem"
                             width="100%"
                             minHeight="31rem"
                             borderRadius="8px"
                             bgcolor="white"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="space-between"
                             // onSubmit={handleSubmit(onSubmit)}
                             sx={{
                             [theme.breakpoints.down("md")]: {
@@ -72,7 +69,7 @@ function Login() {
                                     entrar
                                 </Typography>
                             </Stack>
-                            <Stack spacing={4} mt={4}>
+                            <Stack spacing={2}>
                                 <Controller
                                 name="usuario"
                                 control={control}
@@ -103,22 +100,45 @@ function Login() {
                                 )}
                                 />
                             </Stack>
-                            <Button
-                                // isLoading={isSubmitting}
-                                sx={{
-                                    marginTop: "auto",
-                                    display: "flex",
-                                    alignItems: "center",
-                                }}
-                                fullWidth
-                                type="submit"
-                                id="buttonLogin"
-                                size="large"
-                                variant="outlined"
-                            >
-                                Entrar
-                            </Button>
-                        </Stack>
+                            <Stack spacing={1}>
+                                <Button
+                                    // isLoading={isSubmitting}
+                                    sx={{
+                                        marginTop: "auto",
+                                        display: "flex",
+                                        alignItems: "center",
+                                    }}
+                                    fullWidth
+                                    type="submit"
+                                    id="buttonLogin"
+                                    size="large"
+                                    variant="contained"
+                                >
+                                    Entrar
+                                </Button>
+                                <Button
+                                    // isLoading={isSubmitting}
+                                    sx={{
+                                        marginTop: "auto",
+                                        display: "flex",
+                                        alignItems: "center",
+                                    }}
+                                    fullWidth
+                                    type="submit"
+                                    id="buttonNewUsuario"
+                                    size="large"
+                                    variant="outlined"
+                                >
+                                    Criar conta
+                                </Button>
+                                <Typography
+                                variant="subtitle2" 
+                                color={theme.palette.primary.main}
+                                >
+                                    Ainda não tem uma conta? Crie uma nova com um clique.
+                                </Typography>
+                            </Stack>
+                        </Box>
                     </Stack>
                 </Box>
             </Container>
