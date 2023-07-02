@@ -1,10 +1,15 @@
+import { CssBaseline, ThemeProvider } from "@mui/material"
+import Login from "./pages/login"
+import theme from "./styles/theme"
+
 function App() {
 
   return (
     <>
-      <p>
-       oi
-      </p>
+    <CssBaseline />
+    <ThemeProvider theme={theme}>
+      <Login />
+    </ThemeProvider>
     </>
   )
 }
