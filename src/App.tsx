@@ -1,14 +1,17 @@
 import { CssBaseline, ThemeProvider } from "@mui/material"
-import Login from "./pages/login"
 import theme from "./styles/theme"
+import { BrowserRouter } from "react-router-dom"
+import Router from "./routes"
 
 function App() {
 
   return (
     <>
-    <CssBaseline />
     <ThemeProvider theme={theme}>
-      <Login />
+      <BrowserRouter>
+        <CssBaseline />
+        <Router />
+      </BrowserRouter>
     </ThemeProvider>
     </>
   )
